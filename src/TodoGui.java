@@ -214,9 +214,18 @@ public class TodoGui extends JFrame {
      *     for example: "Sorted by difficulty: verified".
      */
     private void sortBy(String field) {
-        // TODO
         Task[] arr = tasks.toArray(new Task[0]);
-        showError("sortBy is not finished yet");
+        Sorts.bubbleSort(arr, field);
+        tasks.clear();
+        for (Task taskity : arr) {
+            tasks.add(taskity);
+        }
+        refreshTable();
+        if (Sorts.isSorted(arr, field)) {
+            showStatus("Sorted by " + field + ": verified");
+        } else {
+            showStatus("Sorted by " + field + ": not verified");
+        }
     }
 
     private void refreshTable() {
